@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Wave On Website Using HTML CSS JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <link rel="shortcut icon" href="OIP (1).jpg" type="image/x-icon">
+</head>
+<body>
+    <div class="hero">
+        <div class="music">
+            <img src="OIP (1).jpg" >
+            <div class="info">
+                <h1>Juice WRLD - All Girls Are The Same (Directed by Cole Bennett)</h1>
+                <p>Album - Juice WRLD (Goodbye & Good Riddance)</p>
+                <div id="waveform"></div>
+                    <div class="controls">
+                        <img src="play.png" id="playBtn">
+                        <img src="stop.png" id="stopBtn">
+                        <img src="volume.png" id="volumeBtn"> 
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script>
+        var playBtn = document.getElementById('playBtn')
+        var stopBtn = document.getElementById('stopBtn')
+        var volumeBtn = document.getElementById('volumeBtn')
+
+        var wavesurfer = WaveSurfer.create({
+             container: '#waveform',
+             waveColor: '#dde5ec',
+             progressColor: '#03cebf',
+             barWidth: 4,
+             height:90,
+             Responsive: true,
+             hideScrollbar: true,
+             barRadius: 4
+        });
+
+        wavesurfer.load('Juice WRLD - All Girls Are The Same (Dir. by ColeBennett).mp3');
+
+        playBtn.onclick = function(){
+            wavesurfer.playPause();
+            if(playBtn.src.includes('play.png')){
+                playBtn.src ='pause.png';
+            }else{
+                playBtn.src = 'play.png';
+            }
+        }
+        stopBtn.onclick = function(){
+            wavesurfer.stop();
+            playBtn.src = 'play.png';
+        }
+        volumeBtn.onclick = function(){
+            wavesurfer.toggleMute();
+            if(volumeBtn.src.includes('volume.png')){
+                volumeBtn.src = 'mute.png';
+            }else{
+                volumeBtn.src ='volume.png';
+            }
+        }
+
+        wavesurfer.on('finish', function () {
+            playBtn.src = 'play.png';
+            wavesurfer.stop();
+            
+});
+    </script>
+</body>
+</html>
